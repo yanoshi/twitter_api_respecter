@@ -7,7 +7,16 @@ require 'fileutils'
 
 
 def make_mock(list)
-	p list 
+	list.each do |item|
+		fullpath=item[:directory].sub(":id","hoge").sub(":slug","hoge")
+		dirpath = File.dirname(fullpath)
+		FileUtils.mkdir_p(dirpath) unless FileTest.exist?(dirpath)
+
+		File.open(fullpath,"w") do |file|
+			file.puts(item["example"])
+		end
+	end
+	
 end
 
 def get_example(url)
@@ -55,10 +64,11 @@ def main
 			tempurl=apiname["href"]
 			api_list.push({ 
 				:url =>  "https://dev.twitter.com" + tempurl,
-				:directory => "api" + tempurl,
+				:directory => "api/" + apiname.inner_text.sub("GET ","") + ".json",
 				:example => get_example("https://dev.twitter.com" + tempurl) })
 			#p apiname.inner_text
 			#p apiname["href"]
+			p api_list[-1][:directory].sub(":id","hoge")
 		end
 	end
 
