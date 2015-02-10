@@ -5,6 +5,11 @@ require 'nokogiri'
 
 require 'fileutils'
 
+#書き換えてね。
+id=ARGV[0]
+slug=ARGV[1]
+place_id=ARGV[2]
+
 
 def make_mock(list)
 	list.each do |item|
