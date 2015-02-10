@@ -8,7 +8,7 @@ require 'fileutils'
 
 def make_mock(list)
 	list.each do |item|
-		fullpath=item[:directory].sub(":id","hoge").sub(":slug","hoge")
+		fullpath=item[:directory].sub(":id","hoge").sub(":slug","hoge").sub(":place_id","hoge").sub(" ","")
 		dirpath = File.dirname(fullpath)
 		FileUtils.mkdir_p(dirpath) unless FileTest.exist?(dirpath)
 
